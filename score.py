@@ -19,7 +19,6 @@ def GetPage():
                 break
         break
     term = 2013.2
-    name = raw_input('please input your name:').decode('gbk').encode('gbk')
     print 'loding...'
     logindata = urllib.urlencode({
         'user':'jwc',
@@ -27,8 +26,7 @@ def GetPage():
     })
     querydata = urllib.urlencode({
         'StuID':StudID,
-        'Term':term,
-        'name':name
+        'Term':term
         })
     
     user_agent = 'Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.153 Safari/537.36'
@@ -45,7 +43,7 @@ def GetPage():
         print 'loding...'
     req = urllib2.Request(mainurl, headers = headers, data = querydata)
     result = opener.open(req)
-    upage = result.read().decode('gbk')
+    upage = result.read().decode('gbk').encode('utf-8')
     parttern = '<td>(.*?)<\/td>'
     match = re.findall(parttern, upage, re.S)
     del match[0]
